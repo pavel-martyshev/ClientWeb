@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Index</title>
+</head>
+<body>
+    <h1>Информация о вашей машине</h1>
+    <div>
+        <form method="post">
+            <div>
+                <label>
+                    Марка <input name="firstName" placeholder="Введите марку">
+                </label>
+                <br>
+                <label>
+                    Модель <input name="lastName" placeholder="Введите модель">
+                </label>
+            </div>
+            <div>
+                <h2>Комфорт:</h2>
+                <label>
+                    Кондиционер <input type="checkbox" value="ac">
+                </label>
+                <br>
+                <label>
+                    Круиз-контроль <input type="checkbox" value="cruise">
+                </label>
+                <br>
+                <label>
+                    Парктроник <input type="checkbox" value="parking-sensors">
+                </label>
+                <br>
+                <label>
+                    Камера заднего вида <input type="checkbox" value="rear-camera">
+                </label>
+                <br>
+                <label>
+                    Подогрев сидений <input type="checkbox" value="heated-seats">
+                </label>
+            </div>
+            <div>
+                <h2>Системы безопасности:</h2>
+                <select name="features[]" multiple size="5">
+                    <option value="abs">ABS</option>
+                    <option value="esp">ESP</option>
+                    <option value="airbags">Подушки безопасности</option>
+                    <option value="brake-assistance">Система помощи при торможении</option>
+                    <option value="immobilizer">Иммобилайзер</option>
+                </select>
+            </div>
+            <div>
+                <h2>Привод:</h2>
+                <label>
+                    Передний <input checked type="radio">
+                </label>
+                <br>
+                <label>
+                    Задний <input type="radio">
+                </label>
+                <br>
+                <label>
+                    Полный <input type="radio">
+                </label>
+            </div>
+            <div>
+                <h2>Тип кузова:</h2>
+                <select>
+                    <option>Седан</option>
+                    <option>Хэтчбек</option>
+                    <option>Джип</option>
+                    <option>Универсал</option>
+                    <option>Купе</option>
+                </select>
+            </div>
+            <br>
+            <div>
+                <h2>Дополнительная информация</h2>
+                <textarea></textarea>
+            </div>
+            <br>
+            <input type="submit" value="Отправить">
+        </form>
+    </div>
+    <br>
+    <div>
+        <a href="./garage.html">Мой гараж</a>
+    </div>
+</body>
+</html>
