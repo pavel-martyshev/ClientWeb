@@ -1,34 +1,73 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
     <title>Мой гараж</title>
 </head>
 <body>
     <h1>Мой гараж</h1>
     <div>
         <h2>Honda Accord Euro R 2002 г.</h2>
-        <img src="photo1.jpg">
+        <img src="photo1.jpg" alt="Honda Accord фото 1">
         <br>
-        <img src="photo2.jpg">
+        <img src="photo2.jpg" alt="Honda Accord фото 2">
         <table border="1">
             <thead>
                 <tr>
-                    <th>Комфорт</th>
-                    <th>Системы безопасности</th>
-                    <th>Привод</th>
-                    <th>Тип кузова</th>
+                    <th colspan="3">Характеристики</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Кондиционер</td>
-                    <td>ABS, Подушки безопасности</td>
+                    <td rowspan="3">Двигатель</td>
+                    <td>Объем</td>
+                    <td>2.2 л</td>
+                </tr>
+                <tr>
+                    <td>Мощность</td>
+                    <td>220 л.с.</td>
+                </tr>
+                <tr>
+                    <td>Тип</td>
+                    <td>Бензиновый</td>
+                </tr>
+                <tr>
+                    <td rowspan="2">Трансмиссия</td>
+                    <td>Кпп</td>
+                    <td>Механика 5-ст.</td>
+                </tr>
+                <tr>
+                    <td>Привод</td>
                     <td>Передний</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Расход топлива</td>
+                    <td>12 л/100км</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Комфорт</td>
+                    <td>Кондиционер</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Системы безопасности</td>
+                    <td>ABS, Подушки безопасности</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Тип кузова</td>
                     <td>Седан</td>
                 </tr>
             </tbody>
         </table>
+        <h3>Другие комплектации этой модели</h3>
+        <ul>
+            <li>1.8 VTE</li>
+            <li>1.8 VTS</li>
+            <li>2.0 VTS F type</li>
+            <li>2.0 VTS leather package</li>
+            <li>2.0 SiR</li>
+            <li>2.0 SiR S package</li>
+            <li>2.0 SiR Euro package</li>
+        </ul>
         <h3>Дополнительная информация</h3>
         <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -36,6 +75,6 @@
     </div>
     <a href="https://auto.drom.ru/honda/accord/generation6/restyling0/?transmission[]=1&mv=2.2&minpower=220" target="_blank">Honda Accrod на Дроме</a>
     <br>
-    <a href="./form.html">Добавить новую мшаину</a>
+    <a href="form.html">Добавить новую мшаину</a>
 </body>
 </html>
