@@ -1,0 +1,51 @@
+body {
+    background-color: #feeed5;
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+}
+
+.content {
+    margin: 0 auto;
+    height: 100%;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    color: #676565;
+}
+
+.courseTitle {
+    margin: .3em 0;
+    text-transform: uppercase;
+    font-size: 2em;
+    line-height: 1.1;
+    font-weight: 500;
+}
+
+.courseSubtitle {
+    margin-bottom: .3em;
+}
+
+.contentParagraph {
+    margin: .3em 0;
+    text-indent: 1em;
+    text-align: justify;
+}
+
+.textBlue {
+    color: #378db2;
+    font-weight: 700;
+}
+
+.priceWithoutDiscount {
+    position: relative;
+    display: inline-block;
+}
+
+.priceWithoutDiscount::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 1px;
+    background: #676565;
+}
