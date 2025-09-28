@@ -1,0 +1,34 @@
+.tableContainer {
+    margin: 0 auto;
+    max-width: 33%;
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+}
+
+.personsTable {
+    width: 100%;
+    border-collapse: collapse;
+    vertical-align: middle;
+}
+
+.personsTable td {
+    padding: 12px 10px;
+}
+
+.personsTable th {
+    padding: 10px 10px 6px 10px;
+}
+
+.personsTable th, td {
+    border: 1px solid #d1d1d1;
+    text-align: start;
+    font-weight: 500;
+}
+
+.personsTable thead {
+    background-color: #3598db;
+    color: #fff;
+}
+
+.personsTable tbody tr:nth-child(odd) {
+    background-color: #eee;
+}
