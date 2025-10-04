@@ -1,40 +1,61 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
+  <head>
     <meta charset="utf-8" />
-    <title>Index</title>
-    <link rel="stylesheet" href="styles/reset.css">
-    <link rel="stylesheet" href="styles/styles.css">
-</head>
-<body>
-    <div class="formContainer">
-        <div class="formTitle">
-            <p>Отправить заявку</p>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>CSS Form</title>
+
+    <link rel="stylesheet" href="styles/reset.css" />
+    <link rel="stylesheet" href="styles/styles.css" />
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="form-container">
+        <div class="form-title-container">
+          <p class="form-title">Отправить заявку</p>
         </div>
 
-        <div class="formBody">
-            <form method="post" class="formBody">
-            <label>
-                <p class="labelText">Ваше имя</p>
-                <input type="text" id="userFirstName" placeholder="Ваше имя *">
-            </label>
-            <label>
-                <p class="labelText">Ваш номер телефона</p>
-                <input type="text" id="userPhoneNumber" placeholder="Ваш номер телефона *">
-            </label>
-            <label>
-                <p class="labelText">Ваш VK или email</p>
-                <input type="text" id="userEmail" placeholder="Ваш VK или email *">
-            </label>
-            <label>
-                <p class="labelText">Комментарий</p>
-                <textarea id="userComment" placeholder="Комментарий (не обязательно)"></textarea>
-            </label>
+        <form method="post" class="form-body">
+          <p class="label-text">Ваше имя</p>
+          <label>
+            <input type="text" id="user-firstName" placeholder="Ваше имя *" />
+          </label>
 
-            <p class="formNote">Заполните и отправьте форму, и мы перезвоним Вам по указанному номеру</p>
-            <button type="submit" class="submitButton">Отправить заявку</button>
+          <p class="label-text">Ваш номер телефона</p>
+          <label>
+            <input
+              type="text"
+              id="user-phoneNumber"
+              placeholder="Ваш номер телефона *"
+            />
+          </label>
+
+          <p class="label-text">Ваш VK или email</p>
+          <label>
+            <input
+              type="text"
+              id="user-email"
+              placeholder="Ваш VK или email *"
+            />
+          </label>
+
+          <p class="label-text">Комментарий</p>
+          <label>
+            <textarea
+              id="user-comment"
+              placeholder="Комментарий (не обязательно)"
+            ></textarea>
+          </label>
+
+          <p class="form-note">
+            Заполните и отправьте форму, и мы перезвоним Вам по указанному
+            номеру
+          </p>
+
+          <button type="submit" class="submit-button">Отправить заявку</button>
         </form>
-        </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>
