@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSSForm", "CSSForm\CSSForm.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkingWithArrays", "WorkingWithArrays\WorkingWithArrays.csproj", "{597A4E5C-44D2-45C8-855D-20FDC3A87FB8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkingWithObjects", "WorkingWithObjects\WorkingWithObjects.csproj", "{67CA040B-0CEE-40C5-AAA5-F8205BA06C16}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{597A4E5C-44D2-45C8-855D-20FDC3A87FB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{597A4E5C-44D2-45C8-855D-20FDC3A87FB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{597A4E5C-44D2-45C8-855D-20FDC3A87FB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67CA040B-0CEE-40C5-AAA5-F8205BA06C16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67CA040B-0CEE-40C5-AAA5-F8205BA06C16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67CA040B-0CEE-40C5-AAA5-F8205BA06C16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67CA040B-0CEE-40C5-AAA5-F8205BA06C16}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
