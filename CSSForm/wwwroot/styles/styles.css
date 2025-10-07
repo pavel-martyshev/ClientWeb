@@ -24,7 +24,7 @@ body {
 }
 
 .form-title {
-    margin: 0 auto 0;
+    margin: 0 auto;
     padding: 0 10px;
     max-width: 720px;
     width: 100%;
@@ -40,48 +40,39 @@ body {
 }
 
 .label-text {
-    margin: 14px 0 5px 0;
+    margin: 14px 0 5px;
     font-weight: 700;
 }
 
-#user-comment {
-    resize: vertical;
-    height: 112px;
-}
-
-#user-firstName, 
-#user-comment,
-#user-phoneNumber,
-#user-email,
+.form-input,
 .labelText {
     width: 100%;
 }
 
-#user-firstName, 
-#user-comment,
-#user-phoneNumber,
-#user-email {
+.form-input {
     border: 0;
     padding: 6px 12px;
 }
 
-#user-firstName::placeholder, 
-#user-comment::placeholder,
-#user-phoneNumber::placeholder,
-#user-email::placeholder {
+.form-input::placeholder {
     color: #98999b;
     font-weight: 100;
 }
 
+.user-comment-input {
+    resize: vertical;
+    height: 112px;
+}
+
 .form-note {
-    margin: 12px 0 8px 0;
+    margin: 12px 0 8px;
     font-weight: 100;
     color: #737373;;
 }
 
 .submit-button {
     padding: 6px 12px;
-    margin-left: auto;
+    margin: 0 0 11px auto;
     border: 0;
     background: #378db2;
     color: #fff;
