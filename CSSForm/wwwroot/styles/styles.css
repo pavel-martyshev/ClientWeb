@@ -40,12 +40,12 @@ body {
 }
 
 .label-text {
+    display: block;
     margin: 14px 0 5px;
     font-weight: 700;
 }
 
-.form-input,
-.labelText {
+.form-input {
     width: 100%;
 }
 
