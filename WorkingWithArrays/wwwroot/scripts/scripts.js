@@ -25,8 +25,8 @@
 
     function getEvenNumbersSquares(array) {
         return Array.from(
-            array.filter((number) => number % 2 === 0),
-            (number) => number * number
+            array.filter(number => number % 2 === 0),
+            number => number * number
         );
     }
 
