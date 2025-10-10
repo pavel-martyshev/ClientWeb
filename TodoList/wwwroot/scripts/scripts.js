@@ -1,3 +1,5 @@
+"use strict";
+
 function getNewButtonElement(textContent, classList) {
     const button = document.createElement("button");
     classList.forEach(className => button.classList.add(className));
