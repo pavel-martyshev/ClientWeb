@@ -1,3 +1,5 @@
+"use strict";
+
 function Animal(name) {
     this.name = name;
 }

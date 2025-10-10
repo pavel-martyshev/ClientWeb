@@ -1,3 +1,5 @@
+"use strict";
+
 class ClassAnimal {
     constructor(name) {
         this.name = name;
