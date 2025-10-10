@@ -108,6 +108,8 @@ function renderTodoList() {
 (function () {
     window.todoList = window.todoList || [];
 
-    const submitButton = document.querySelector(".todo-form");
-    submitButton.addEventListener("submit", saveNewTodo);
+    document.addEventListener("DOMContentLoaded", event => {
+       const submitButton = document.querySelector(".todo-form");
+       submitButton.addEventListener("submit", saveNewTodo); 
+    });
 })();
