@@ -109,15 +109,19 @@
         ];
     }
 
-    function getCountriesWithMostCountCities(countries) {
-        const maxCitiesCount = Math.max(...countries.map((country) => country.cities.length));
-        return countries.filter((country) => country.cities.length === maxCitiesCount);
+    function getCountriesWithMaxCitiesCount(countries) {
+        if (!countries) {
+            return null;
+        }
+
+        const maxCitiesCount = Math.max(...countries.map(country => country.cities.length));
+        return countries.filter(country => country.cities.length === maxCitiesCount);
     }
 
-    function getCountriesWithPopulation(countries) {
+    function getCountriesWithPopulations(countries) {
         const countriesWithPopulations = {};
 
-        countries.forEach((country) => {
+        countries.forEach(country => {
             countriesWithPopulations[country.name] = country.cities.reduce((populationSum, city) => {
                 return populationSum + city.population;
             }, 0);
@@ -128,12 +132,17 @@
 
     const countries = getCountriesArray();
 
-    const countriesWithMostCountCities = getCountriesWithMostCountCities(countries);
-    console.log(
-        `Страны с самым большим количеством городов:\n${countriesWithMostCountCities
-            .map((country) => country.name)
-            .join("\n")}`
-    );
+    const countriesWithMostCountCities = getCountriesWithMaxCitiesCount(countries);
 
-    console.log(getCountriesWithPopulation(countries));
+    if (countriesWithMostCountCities) {
+        console.log(
+            `Страны с самым большим количеством городов:\n${countriesWithMostCountCities
+                .map(country => country.name)
+                .join("\n")}`
+        );
+    } else {
+        console.log("Список стран пуст");
+    }
+
+    console.log(getCountriesWithPopulations(countries));
 })();
