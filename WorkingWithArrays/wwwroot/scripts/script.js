@@ -5,12 +5,12 @@
         return Array.from({ length }, (_, i) => i + 1);
     }
 
-    function getFirstFewElements(array, elementsNumber) {
-        return array.slice(0, elementsNumber);
+    function getFirstElements(array, elementsCount) {
+        return array.slice(0, elementsCount);
     }
 
-    function getLastFewElements(array, elementsNumber) {
-        return array.slice(-elementsNumber);
+    function getLastElements(array, elementsCount) {
+        return array.slice(-elementsCount);
     }
 
     function getEvenNumbersSum(array) {
@@ -32,8 +32,8 @@
     const numbersArray = getNumbersArray(10);
     numbersArray.sort((a, b) => b - a);
 
-    const firstFiveElements = getFirstFewElements(numbersArray, 5);
-    const lastFiveElements = getLastFewElements(numbersArray, 5);
+    const firstFiveElements = getFirstElements(numbersArray, 5);
+    const lastFiveElements = getLastElements(numbersArray, 5);
 
     console.log(`Первые 5 элементов: ${firstFiveElements.join(", ")}`);
     console.log(`Последние 5 элементов: ${lastFiveElements.join(", ")}`);
