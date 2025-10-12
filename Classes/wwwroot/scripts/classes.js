@@ -1,42 +1,42 @@
 "use strict";
 
-class ClassAnimal {
-    constructor(name) {
-        this.name = name;
+(function () {
+    class Animal {
+        constructor(name) {
+            this.name = name;
+        }
+
+        speak() {
+            console.log(`${this.name} издает звук`);
+        }
     }
 
-    speak() {
-        console.log(`${this.name} издает звук`);
-    }
-}
+    class Cat extends Animal {
+        constructor(name) {
+            super(name);
+        }
 
-class ClassCat extends ClassAnimal {
-    constructor(name) {
-        super(name);
-    }
-
-    speak() {
-        console.log(`${this.name} мяукает`);
-    }
-}
-
-class ClassDog extends ClassAnimal {
-    constructor(name) {
-        super(name);
+        speak() {
+            console.log(`${this.name} мяукает`);
+        }
     }
 
-    speak() {
-        console.log(`${this.name} гавкает`);
-    }
-}
+    class Dog extends Animal {
+        constructor(name) {
+            super(name);
+        }
 
-(function() {
-    const animal = new ClassAnimal("Животное");
+        speak() {
+            console.log(`${this.name} гавкает`);
+        }
+    }
+
+    const animal = new Animal("Животное");
     animal.speak();
 
-    const cat = new ClassCat("Сара");
+    const cat = new Cat("Сара");
     cat.speak();
 
-    const dog = new ClassDog("Шарик");
+    const dog = new Dog("Шарик");
     dog.speak();
 })();

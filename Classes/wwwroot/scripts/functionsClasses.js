@@ -1,34 +1,34 @@
 "use strict";
 
-function Animal(name) {
-    this.name = name;
-}
+(function () {
+    function Animal(name) {
+        this.name = name;
+    }
 
-Animal.prototype.speak = function() {
-    console.log(`${this.name} издает звук`);
-}
+    Animal.prototype.speak = function () {
+        console.log(`${this.name} издает звук`);
+    };
 
-function Cat(name) {
-    Animal.call(this, name);
-}
+    function Cat(name) {
+        Animal.call(this, name);
+    }
 
-Cat.prototype.speak = function() {
-    console.log(`${this.name} мяукает`);
-}
+    Cat.prototype.speak = function () {
+        console.log(`${this.name} мяукает`);
+    };
 
-Object.setPrototypeOf(Cat.prototype, Animal.prototype);
+    Object.setPrototypeOf(Cat.prototype, Animal.prototype);
 
-function Dog(name) {
-    Animal.call(this, name);
-}
+    function Dog(name) {
+        Animal.call(this, name);
+    }
 
-Dog.prototype.speak = function() {
-    console.log(`${this.name} гавкает`);
-}
+    Dog.prototype.speak = function () {
+        console.log(`${this.name} гавкает`);
+    };
 
-Object.setPrototypeOf(Dog.prototype, Animal.prototype);
+    Object.setPrototypeOf(Dog.prototype, Animal.prototype);
 
-(function() {
     const animal = new Animal("Животное");
     animal.speak();
 
