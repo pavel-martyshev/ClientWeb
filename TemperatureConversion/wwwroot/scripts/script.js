@@ -53,8 +53,8 @@
             }
         });
 
-        temperatureInput.addEventListener("keydown", event => {
-            if (event.key === "Enter") {
+        temperatureInput.addEventListener("keydown", e => {
+            if (e.key === "Enter") {
                 convertTemperature();
             }
         });
