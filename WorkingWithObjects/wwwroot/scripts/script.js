@@ -108,17 +108,13 @@
             }
         ];
     }
-
+    
     function getCountriesWithMaxCitiesCount(countries) {
-        if (!countries) {
+        if (!countries.length) {
             return [];
         }
 
         const maxCitiesCount = Math.max(...countries.map(country => country.cities.length));
-
-        if (!maxCitiesCount) {
-            return [];
-        } 
 
         return countries.filter(country => country.cities.length === maxCitiesCount);
     }
@@ -138,14 +134,14 @@
     const countries = getCountriesArray();
     const countriesWithMaxCitiesCount = getCountriesWithMaxCitiesCount(countries);
 
-    if (countriesWithMaxCitiesCount.length > 0) {
+    if (countriesWithMaxCitiesCount.length === 0) {
+        console.log("Список стран пуст");
+    } else {
         console.log(
             `Страны с самым большим количеством городов:\n${countriesWithMaxCitiesCount
                 .map(country => country.name)
                 .join("\n")}`
         );
-    } else {
-        console.log("Список стран пуст");
     }
 
     console.log(getCountriesWithPopulations(countries));
