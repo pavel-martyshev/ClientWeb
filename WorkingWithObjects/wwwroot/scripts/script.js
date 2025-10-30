@@ -1,4 +1,6 @@
-﻿(function () {
+﻿"use strict";
+
+(function () {
     function getCountriesArray() {
         return [
             {
@@ -110,7 +112,7 @@
     }
     
     function getCountriesWithMaxCitiesCount(countries) {
-        if (!countries.length) {
+        if (countries.length === 0) {
             return [];
         }
 
