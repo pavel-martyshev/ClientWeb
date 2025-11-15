@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Книга контактов</title>
+
+        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+        <link rel="stylesheet" href="styles/styles.css">
+
+        <script defer src="node_modules/jquery/dist/jquery.js"></script>
+        <script defer src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+        <script defer src="scripts/script.js"></script>
+    </head>
+    <body>
+        <div class="fluid d-flex min-vh-100">
+            <div class="col-2 bg-secondary">
+                <div class="col-2 px-5 position-fixed start-0 text-light">
+                    <h1 class="mt-4 mb-4 position-sticky">Новый контакт</h1>
+
+                    <form class="new-contact-form col">
+                        <div>
+                            <label for="last-name-input" class="form-label">Фамилия <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="last-name-input" placeholder="Фамилия">
+                        </div>
+
+                        <div>
+                            <label for="first-name-input" class="mt-3 form-label">Имя <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="first-name-input" placeholder="Имя">
+                        </div>
+
+                        <div>
+                            <label for="phone-number-input" class="mt-3 form-label"
+                                >Номер телефона (без 8 и +7) <span class="text-danger">*</span></label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="phone-number-input"
+                                placeholder="Номер телефона (без 8 и +7)"
+                            >
+                        </div>
+
+                        <button type="submit" class="submit-btn mt-3 btn btn-dark" disabled>Сохранить</button>
+                        <span class="number-exists-error d-none text-danger">Такой номер уже существует</span>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-10 px-5 py-4 bg-dark">
+                <table class="contacts-table table table-dark table-striped table-hover align-middle">
+                    <div class="control-panel row mb-2 d-flex justify-content-between">
+                        <div class="col-2">
+                            <button class="remove-group-btn btn btn-danger" disabled>Удалить</button>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="row">
+                                <div class="col-7 auto">
+                                    <input type="text" class="form-control d-flex justify-content-end" id="filter-input" placeholder="Поиск">
+                                </div>
+
+                                <button class="apply-filter-btn col-2 me-2 btn btn-primary">Применить</button>
+                                <button class="reset-filter-btn col-2 btn btn-light">Сбросить</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <thead>
+                        <tr>
+                            <th class="narrow-column text-center">
+                                <input type="checkbox" class="thead-checkbox form-check-input" id="exampleCheck1">
+                            </th>
+                            <th class="narrow-column text-center">№</th>
+                            <th>Фамилия</th>
+                            <th>Имя</th>
+                            <th>Номер телефона</th>
+                            <th class="narrow-column text-center"></th>
+                            <th class="narrow-column text-center"></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <!-- <tr id="0">
+                            <td class="text-center">
+                                <input type="checkbox" class="contact-checkbox form-check-input" id="exampleCheck1">
+                            </td>
+                            <td class="contact-number text-center">1</td>
+                            <td class="last-name">йцук</td>
+                            <td class="first-name">куцй</td>
+                            <td class="phone-number">+71234567890</td>
+                            <td><div class="table-button edit-button"></div></td>
+                            <td><div class="table-button delete-button"></div></td>
+                        </tr>
+                        <tr id="0">
+                            <td class="text-center">
+                                <input type="checkbox" class="contact-checkbox form-check-input" id="exampleCheck1">
+                            </td>
+                            <td class="contact-number text-center">1</td>
+                            <td class="last-name">йцук</td>
+                            <td class="first-name">куцй</td>
+                            <td class="phone-number">+71234567890</td>
+                            <td><div class="table-button edit-button"></div></td>
+                            <td><div class="table-button delete-button"></div></td>
+                        </tr>
+                        <tr id="0">
+                            <td class="text-center">
+                                <input type="checkbox" class="contact-checkbox form-check-input" id="exampleCheck1">
+                            </td>
+                            <td class="contact-number text-center">1</td>
+                            <td class="last-name">йцук</td>
+                            <td class="first-name">куцй</td>
+                            <td class="phone-number">+71234567890</td>
+                            <td><div class="table-button edit-button"></div></td>
+                            <td><div class="table-button delete-button"></div></td>
+                        </tr> -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

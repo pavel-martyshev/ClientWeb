@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "bootstrap": "^5.3.8",
+    "feather-icons": "^4.29.2",
+    "jquery": "^3.7.1"
+  }
+}
