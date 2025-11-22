@@ -1,26 +1,27 @@
 "use strict";
 
 (function () {
-    function matchTemperatureInput(temperature) {
-        return temperature.match(/^-?\d*,?\d*$/g);
+    function isNumber(string) {
+        return /^-?$|^-?[1-9]\d*([,.]\d*)?$/.test(string);
     }
 
     function convertFromCelsiusToKelvin(celsiusTemperature) {
-        return (celsiusTemperature + 273.15);
+        return celsiusTemperature + 273.15;
     }
 
     function convertFromCelsiusToFahrenheit(celsiusTemperature) {
-        return (celsiusTemperature * 1.8 + 32);
+        return celsiusTemperature * 1.8 + 32;
     }
 
-    function convertTemperature() {
+    function convertTemperature(e) {
+        e.preventDefault();
         const temperatureInput = document.querySelector(".temperature-input");
 
         if (temperatureInput.value === "") {
             return;
         }
 
-        const celsiusTemperature = Number(temperatureInput.value);
+        const celsiusTemperature = Number(temperatureInput.value.replace(",", "."));
 
         if (isNaN(celsiusTemperature)) {
             temperatureInput.value = "";
@@ -36,30 +37,19 @@
 
     window.addEventListener("DOMContentLoaded", () => {
         const temperatureInput = document.querySelector(".temperature-input");
+        let lastValidValue = "";
 
         temperatureInput.addEventListener("input", e => {
-            if (!matchTemperatureInput(e.target.value)) {
-                e.target.value = e.target.value.slice(0, -1);
+            const value = e.target.value.trim();
+
+            if (isNumber(value)) {
+                lastValidValue = value;
+            } else {
+                e.target.value = lastValidValue;
             }
         });
 
-        temperatureInput.addEventListener("paste", e => {
-            e.preventDefault();
-  
-            const clipboardData = e.clipboardData.getData("text/plain");
-
-            if (matchTemperatureInput(clipboardData)) {
-                temperatureInput.value = clipboardData;
-            }
-        });
-
-        temperatureInput.addEventListener("keydown", e => {
-            if (e.key === "Enter") {
-                convertTemperature();
-            }
-        });
-
-        const convertButton = document.querySelector(".convert-button");
-        convertButton.addEventListener("click", convertTemperature);
+        const converterForm = document.querySelector(".converter-form");
+        converterForm.addEventListener("submit", convertTemperature);
     });
 })();

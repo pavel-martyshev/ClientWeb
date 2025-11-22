@@ -10,10 +10,11 @@
 <body>
     <div class="converter-wrapper">
         <div class="converter-body">
-            <label for="temperature-input">Температура в °C</label>
-            <input id="temperature-input" class="temperature-input" type="text" placeholder="°C">
-            
-            <button class="convert-button">Конвертировать</button>
+            <form class="converter-form">
+                <label for="temperature-input">Температура в °C</label>
+                <input id="temperature-input" class="temperature-input" type="text" placeholder="°C">
+                <button class="convert-button" type="submit">Конвертировать</button>
+            </form>
 
             <p class="conversion-result kelvin-temperature"></p>
             <p class="conversion-result fahrenheit-temperature"></p>

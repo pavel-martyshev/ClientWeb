@@ -18,6 +18,14 @@
     gap: 15px;
 }
 
+.converter-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
 .temperature-input {
     margin-top: 6px;
     padding: 0 5px;
