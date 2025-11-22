@@ -16,28 +16,27 @@
 
     console.log(`Средний возраст всех людей: ${_.meanBy(people, p => p.age)}`);
 
-    console.log(
-        _.chain(people)
-            .filter(p => {
-                if (p.age >= 20 && p.age <= 30) {
-                    return p;
-                }
-            })
-            .orderBy(["age"])
-            .value()
-    );
+    const peopleAged20To30 = _.chain(people)
+        .filter(p => p.age >= 20 && p.age <= 30)
+        .sortBy(p => p.age)
+        .value();
 
     console.log(
-        _.chain(people)
-            .uniqBy(p => p.name)
-            .filter(p => {
-                if (p.age >= 20 && p.age <= 30) {
-                    return p;
-                }
-            })
-            .orderBy(["age"], ["desc"])
-            .value()
+        "Люди в возрасте от 20 до 30 включительно:",
+        peopleAged20To30
     );
 
-    console.log(_.countBy(people, "name"));
+    const uniqueNamesAged20To30 = _.chain(peopleAged20To30)
+        .uniqBy(p => p.name)
+        .orderBy(["age"], ["desc"])
+        .map(p => p.name)
+        .value();
+
+    console.log(
+        "Список уникальных имен людей с возрастом от 20 до 30 включительно:",
+        uniqueNamesAged20To30
+    );
+
+    const namesCount = _.countBy(people, "name");
+    console.log("Количество каждого имени в списке:", namesCount);
 })();
