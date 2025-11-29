@@ -14,29 +14,32 @@
         { name: "Дмитрий", age: 27 }
     ];
 
-    console.log(`Средний возраст всех людей: ${_.meanBy(people, p => p.age)}`);
+    const peopleAverageAge = _.meanBy(people, p => p.age);
+    console.log(`Средний возраст всех людей: ${peopleAverageAge}`);
 
-    const peopleAged20To30 = _.chain(people)
+    const peopleAgedFrom20To30 = _.chain(people)
         .filter(p => p.age >= 20 && p.age <= 30)
         .sortBy(p => p.age)
         .value();
 
     console.log(
         "Люди в возрасте от 20 до 30 включительно:",
-        peopleAged20To30
+        peopleAgedFrom20To30
     );
 
-    const uniqueNamesAged20To30 = _.chain(peopleAged20To30)
-        .uniqBy(p => p.name)
-        .orderBy(["age"], ["desc"])
+    const uniqueNamesAgedFrom20To30 = _.chain(peopleAgedFrom20To30)
+        .filter(p => p.age >= 20 && p.age <= 30)
         .map(p => p.name)
+        .uniq()
+        .sort()
+        .reverse()
         .value();
 
     console.log(
         "Список уникальных имен людей с возрастом от 20 до 30 включительно:",
-        uniqueNamesAged20To30
+        uniqueNamesAgedFrom20To30
     );
 
-    const namesCount = _.countBy(people, "name");
-    console.log("Количество каждого имени в списке:", namesCount);
+    const nameCounts = _.countBy(people, "name");
+    console.log("Количество каждого имени в списке:", nameCounts);
 })();
