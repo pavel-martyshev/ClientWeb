@@ -2,7 +2,7 @@
 
 (function () {
     function isNumber(string) {
-        return /^-?$|^-?[1-9]\d*([,.]\d*)?$/.test(string);
+        return /^-?$|^-?[0-9]\d*([,.]\d*)?$/.test(string);
     }
 
     function convertFromCelsiusToKelvin(celsiusTemperature) {
@@ -16,17 +16,16 @@
     function convertTemperature(e) {
         e.preventDefault();
         const temperatureInput = document.querySelector(".temperature-input");
+        const errorMessage = document.querySelector(".empty-input-error-message");
+        errorMessage.style.display = "none";
 
         if (temperatureInput.value === "") {
+            errorMessage.style.display = "block";
             return;
         }
 
-        const celsiusTemperature = Number(temperatureInput.value.replace(",", "."));
-
-        if (isNaN(celsiusTemperature)) {
-            temperatureInput.value = "";
-            return;
-        }
+        const celsiusTemperature = Number(temperatureInput.value);
+        temperatureInput.value = celsiusTemperature.toString();
         
         const kelvinTemperatureResult = document.querySelector(".kelvin-temperature");
         kelvinTemperatureResult.textContent = `${celsiusTemperature} °C = ${convertFromCelsiusToKelvin(celsiusTemperature).toFixed(2)} K`;
@@ -40,10 +39,11 @@
         let lastValidValue = "";
 
         temperatureInput.addEventListener("input", e => {
-            const value = e.target.value.trim();
+            const value = e.target.value.trim().replace(",", ".");
 
             if (isNumber(value)) {
                 lastValidValue = value;
+                temperatureInput.value = value;
             } else {
                 e.target.value = lastValidValue;
             }

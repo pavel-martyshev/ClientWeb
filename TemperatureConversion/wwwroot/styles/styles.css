@@ -26,6 +26,11 @@
     gap: 10px;
 }
 
+.empty-input-error-message {
+    color: #ff4d4d;
+    display: none;
+}
+
 .temperature-input {
     margin-top: 6px;
     padding: 0 5px;
