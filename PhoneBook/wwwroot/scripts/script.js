@@ -315,7 +315,7 @@
         const firstNameInput = $("#first-name-input").on("input", enableSubmitButton);
         const phoneNumberInput = $("#phone-number-input").on("input", enableSubmitButton);
 
-        $(".new-contact-form").on("submit", () => {
+        $(".new-contact-form").submit(() => {
             clearValidateErrors();
             $(".form-last-name-incorrect-input-message").removeClass("d-block").addClass("d-none");
             $(".form-first-name-incorrect-input-message").removeClass("d-block").addClass("d-none");
