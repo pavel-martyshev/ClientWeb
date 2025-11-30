@@ -268,7 +268,6 @@
 
     function showRemoveConfirmationModal(e) {
         const removeConfirmationModal = $("#remove-confirmation-modal");
-        // removeConfirmationModal.find(".remove-confirm-button").click(removeContacts);
         const buttonElement = $(e.target);
 
         if (buttonElement.hasClass("remove-group-button")) {
