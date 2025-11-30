@@ -1,56 +1,92 @@
 "use strict";
 
 (function() {
-    let phoneBook = [];
-
-    function setIncorrectInputClass(inputElement) {
-        inputElement.addClass("incorrect-input");
-    }
+    let contacts = [];
+    let editedContactId = "";
+    let contactToRemoveId = "";
 
     function validateInputsValues(lastNameInput, firstNameInput, phoneNumberInput, isNew = false) {
-        const namesPattern = /[^A-Za-zА-Яа-я]+$/g;
-        let isNotErrors = true;
+        const namesPattern = /[^A-Za-zА-Яа-я-]+$/g;
+        let isValid = true;
 
-        if (Boolean(lastNameInput.val().trim().match(namesPattern))) {
-            setIncorrectInputClass(lastNameInput);
-            isNotErrors = false;
+        const lastNameValue = lastNameInput.val().trim();
+
+        if (Boolean(lastNameValue.match(namesPattern)) || lastNameValue === "") {
+            lastNameInput.addClass("incorrect-input");
+
+            if (editedContactId) {
+                $(".edit-last-name-incorrect-input-message").removeClass("d-none").addClass("d-block");
+            } else {
+                $(".form-last-name-incorrect-input-message").removeClass("d-none").addClass("d-block");
+            }
+
+            isValid = false;
         }
 
-        if (Boolean(firstNameInput.val().trim().match(namesPattern))) {
-            setIncorrectInputClass(firstNameInput);
-            isNotErrors = false;
+        const firstNameValue = firstNameInput.val().trim();
+
+        if (Boolean(firstNameValue.match(namesPattern)) || firstNameValue === "") {
+            firstNameInput.addClass("incorrect-input");
+
+            if (editedContactId) {
+                $(".edit-first-name-incorrect-input-message").removeClass("d-none").addClass("d-block");
+            } else {
+                $(".form-first-name-incorrect-input-message").removeClass("d-none").addClass("d-block");
+            }
+            
+            isValid = false;
         }
 
-        const phoneNumber = phoneNumberInput.val().trim();
+        const phoneNumberValue = phoneNumberInput.val().trim();
 
-        if (!Boolean(phoneNumber.match(/^\d{10}$/g))) {
-            setIncorrectInputClass(phoneNumberInput);
-            isNotErrors = false;
+        if (!Boolean(phoneNumberValue.match(/^\d{10}$/g)) || phoneNumberValue === "") {
+            phoneNumberInput.addClass("incorrect-input");
+
+            if (editedContactId) {
+                $(".edit-phone-number-incorrect-input-message").removeClass("d-none").addClass("d-block");
+            } else {
+                $(".form-phone-number-incorrect-input-message").removeClass("d-none").addClass("d-block");
+            }
+            
+            isValid = false;
         }
 
-        if (isNew) {
-            for (const contact of phoneBook) {
-                if (contact.phoneNumber === phoneNumber) {
-                    $(".number-exists-error")
+        $.each(contacts, (index, contact) => {
+            if (contact.phoneNumber === phoneNumberValue) {                  
+                if (editedContactId && editedContactId !== `contact-${index}`) {
+                    phoneNumberInput.addClass("incorrect-input");
+
+                    $(".edited-number-exists-error")
                         .removeClass("d-none")
                         .addClass("d-block");
 
-                    isNotErrors = false;
-                    break;
+                    isValid = false;
+                    return false;
+                } 
+
+                if (isNew) {
+                    phoneNumberInput.addClass("incorrect-input");
+
+                    $(".number-exists-error")
+                        .removeClass("d-none")
+                        .addClass("d-block");
+                    
+                    isValid = false;
+                    return false;
                 }
             }
-        }
+        })
 
-        return isNotErrors;
+        return isValid;
     }
 
     function enableSubmitButton() {
-        const submitBtn = $(".submit-btn");
+        const submitBtn = $(".submit-button");
 
         if ($("#last-name-input").val() && $("#first-name-input").val() && $("#phone-number-input").val()) {
-            submitBtn.removeAttr("disabled");
+            submitBtn.prop("disabled", false);
         } else {
-            submitBtn.attr("disabled", true);
+            submitBtn.prop("disabled", true);
         }
     }
 
@@ -65,13 +101,13 @@
     }
     
     function turnOnOffRemoveGroupButton() {
-        const removeGroupBtn = $(".remove-group-btn");
+        const removeGroupBtn = $(".remove-group-button");
         const checkedContactCheckbox = $(".contact-checkbox:checked");
 
         if (checkedContactCheckbox.length > 0) {
             removeGroupBtn.prop("disabled", false);
 
-            if (checkedContactCheckbox.length === phoneBook.length) {
+            if (checkedContactCheckbox.length === contacts.length) {
                 $(".thead-checkbox").prop("checked", true);
             }
         } else {
@@ -80,33 +116,32 @@
         }
     }
 
-    function renderPhoneBookTable(filteredPhoneBook) {
+    function renderPhoneBookTable(filteredContacts) {
         $(".thead-checkbox").prop("checked", false);
-
-        const phoneBookToRender = filteredPhoneBook || phoneBook;
+        const phoneBookToRender = filteredContacts || contacts;
 
         const tbodyHtml = phoneBookToRender.map((value, i) =>
-            `
-            <tr id="contact-${i}">
-                <td class="text-center"><input type="checkbox" class="contact-checkbox form-check-input" id="exampleCheck1"></td>
+            `<tr id="contact-${i}">
+                <td class="text-center"><input type="checkbox" class="contact-checkbox form-check-input"></td>
                 <td class="contact-number text-center">${i + 1}</td>
                 <td class="last-name">${value.lastName}</td>
                 <td class="first-name">${value.firstName}</td>
                 <td class="phone-number">+7${value.phoneNumber}</td>
-                <td><div class="table-button edit-button"></div></td>
-                <td><div class="table-button delete-button"></div></td>
-            </tr>
-            `
+                <td><div class="table-button edit-button" title="Редактировать контакт"></div></td>
+                <td><div class="table-button remove-button" data-bs-toggle="modal" data-bs-target="#remove-confirmation-modal" title="Удалить контакт"></div></td>
+            </tr>`
         ).join("");
 
-        $("tbody").html(tbodyHtml);
+        $(".contacts-table-tbody").html(tbodyHtml);
         $(".edit-button").click(goToContactEdit);
-        $(".delete-button").click(removeContact);
+        $(".remove-button").click(showRemoveConfirmationModal);
         $(".contact-checkbox").click(turnOnOffRemoveGroupButton);
     }
 
     function goToContactEdit(e) {
         const tr = $(e.target).closest("tr");
+
+        editedContactId = tr.attr("id");
         let lastNameElement = tr.find(".last-name");
         let firstNameElement = tr.find(".first-name");
         let phoneNumberElement = tr.find(".phone-number");
@@ -114,15 +149,34 @@
         const lastName = lastNameElement.text();
         const firstName = firstNameElement.text();
         let phoneNumber = phoneNumberElement.text();
-        phoneNumber = phoneNumber.replace("+7", "")
+        phoneNumber = phoneNumber.replace("+7", "");
 
         lastNameElement.remove();
         firstNameElement.remove();
         phoneNumberElement.remove();
 
-        lastNameElement = $("<td class='last-name'><input type='text' class='form-control' id='edited-last-name-input'></td>");
-        firstNameElement = $("<td class='first-name'><input type='text' class='form-control' id='edited-first-name-input'></td>");
-        phoneNumberElement = $("<td class='phone-number'><input type='text' class='form-control' id='edited-phone-number-input'></td>");
+        lastNameElement = $(
+            `
+            <td class='last-name'><input type='text' class='form-control' id='edited-last-name-input'>
+                <p class="edit-last-name-incorrect-input-message mb-0 d-none text-danger">Некорректный формат</p>
+            </td>
+            `
+        );
+        firstNameElement = $(
+            `
+            <td class='first-name'><input type='text' class='form-control' id='edited-first-name-input'>
+                <p class="edit-first-name-incorrect-input-message mb-0 d-none text-danger">Некорректный формат</p>
+            </td>
+            `
+        );
+        phoneNumberElement = $(
+            `
+            <td class='phone-number'><input type='text' class='form-control' id='edited-phone-number-input'>
+                <p class="edit-phone-number-incorrect-input-message mb-0 d-none text-danger">Некорректный формат</p>
+                <span class="edited-number-exists-error d-none text-danger">Такой номер уже существует</span>
+            </td>
+            `
+        );
 
         lastNameElement.find(".form-control").val(lastName);
         firstNameElement.find(".form-control").val(firstName);
@@ -132,22 +186,42 @@
         tr.find(".edit-button")
             .off()
             .click(saveEditedContact)
+            .attr("title", "Сохранить изменения")
             .addClass("save-button")
             .removeClass("edit-button");
     }
 
-    function removeContact(e) {
-        const tr = $(e.target).closest("tr");
-        console.log(tr);
+    function removeContacts() {
+        if (contactToRemoveId) {
+            contacts.splice(contactToRemoveId.slice(8), 1);
+            $(`#${contactToRemoveId}`).remove();
 
-        if (window.confirm(`Вы действительно хотите удалить выбранный контакт ${tr.find(".last-name").text()} ${tr.find(".first-name").text()}?`)) {
-            phoneBook.splice(tr.attr("id"), 1);
-            tr.remove();
+            contactToRemoveId = "";
             renderPhoneBookTable();
+
+            return;
         }
+
+        const phoneNumbersToRemove = [];
+
+        $(".contact-checkbox:checked").each((i, checkbox) => {
+            const tr = $(checkbox).closest("tr");
+            phoneNumbersToRemove.push(tr.find(".phone-number").text().replace("+7", ""));
+            tr.remove();
+        });
+
+        contacts = contacts.filter(contact => !phoneNumbersToRemove.includes(contact.phoneNumber));
+        $("thead-checkbox").prop("checked", false);
+        turnOnOffRemoveGroupButton();
+
+        renderPhoneBookTable();
     }
 
     function saveEditedContact(e) {
+        $(".edit-last-name-incorrect-input-message").removeClass("d-block").addClass("d-none");
+        $(".edit-first-name-incorrect-input-message").removeClass("d-block").addClass("d-none");
+        $(".edit-phone-number-incorrect-input-message").removeClass("d-block").addClass("d-none");
+
         const tr = $(e.target).closest("tr");
         let lastNameElement = tr.find(".last-name");
         let firstNameElement = tr.find(".first-name");
@@ -157,11 +231,17 @@
         const firstNameInputElement = firstNameElement.find("input");
         const phoneNumberInputElement = phoneNumberElement.find("input");
 
+        lastNameInputElement.removeClass("incorrect-input");
+        firstNameInputElement.removeClass("incorrect-input");
+        phoneNumberInputElement.removeClass("incorrect-input");
+
         if (validateInputsValues(lastNameInputElement, firstNameInputElement, phoneNumberInputElement)) {
+            editedContactId = "";
+
             const lastName = lastNameInputElement.val();
             const firstName = firstNameInputElement.val();
             let phoneNumber = phoneNumberInputElement.val();
-            phoneNumber = phoneNumber.replace("+7", "")
+            phoneNumber = phoneNumber.replace("+7", "");
 
             lastNameElement.remove();
             firstNameElement.remove();
@@ -175,51 +255,47 @@
             tr.find(".save-button")
                 .off()
                 .click(goToContactEdit)
+                .attr("title", "Редактировать контакт")
                 .addClass("edit-button")
                 .removeClass("save-button");
         }
     }
 
     function saveNewContact(lastName, firstName, phoneNumber) {
-        phoneBook.push(
-            {
-                lastName: lastName,
-                firstName: firstName,
-                phoneNumber: phoneNumber
-            }
-        );
-
+        contacts.push({lastName, firstName, phoneNumber});
         renderPhoneBookTable();
     }
 
-    function removeContactsGroup() {
-        if (window.confirm("Вы действительно хотите удалить выбранные контакты?")) {
-            const phoneNumbersToRemove = [];
+    function showRemoveConfirmationModal(e) {
+        const removeConfirmationModal = $("#remove-confirmation-modal");
+        // removeConfirmationModal.find(".remove-confirm-button").click(removeContacts);
+        const buttonElement = $(e.target);
 
-            $(".contact-checkbox:checked").each((i, checkbox) => {
-                const tr = $(checkbox).closest("tr");
-                phoneNumbersToRemove.push(tr.find(".phone-number").text().replace("+7", ""));
-                tr.remove();
-            });
+        if (buttonElement.hasClass("remove-group-button")) {
+            removeConfirmationModal.find(".remove-modal-message").text("Вы действительно хотите удалить выбранные контакты?");
+        } else if (buttonElement.hasClass("remove-button")) {
+            const tr = buttonElement.closest("tr");
+            contactToRemoveId = tr.attr("id");
 
-            phoneBook = phoneBook.filter(contact => !phoneNumbersToRemove.includes(contact.phoneNumber));
-
-            $("thead-checkbox").prop("checked", false);
-            turnOnOffRemoveGroupButton();
-
-            renderPhoneBookTable();
+            removeConfirmationModal
+                .find(".remove-modal-message")
+                .text(`Вы действительно хотите удалить выбранный контакт ${tr.find(".last-name").text()} ${tr.find(".first-name").text()}?`);
         }
     }
 
     function checkAllCheckBoxes() {
-        $(".contact-checkbox").prop('checked', $(".thead-checkbox").prop("checked"));
+        $(".contact-checkbox").prop("checked", $(".thead-checkbox").prop("checked"));
         turnOnOffRemoveGroupButton();
     }
 
     function applyFilter() {
         const filterValue = $("#filter-input").val().trim();
-        const filteredPhoneBook = phoneBook.filter(c => c.firstName.includes(filterValue) || c.lastName.includes(filterValue) || c.phoneNumber.includes(filterValue));
-        renderPhoneBookTable(filteredPhoneBook);
+        const filteredContacts = contacts.filter(c => 
+            c.firstName.toLowerCase().includes(filterValue.toLowerCase()) || 
+            c.lastName.toLowerCase().includes(filterValue.toLowerCase()) || 
+            c.phoneNumber.toLowerCase().includes(filterValue.toLowerCase())
+        );
+        renderPhoneBookTable(filteredContacts);
     }
 
     function resetFilter(){
@@ -228,12 +304,13 @@
     }
 
     $(() => {
-        $(".remove-group-btn").click(removeContactsGroup);
+        $(".remove-group-button").click(showRemoveConfirmationModal);
         $(".contact-checkbox").click(turnOnOffRemoveGroupButton);
         $(".thead-checkbox").click(checkAllCheckBoxes);
+        $(".remove-confirm-button").click(removeContacts);
 
-        $(".apply-filter-btn").click(applyFilter);
-        $(".reset-filter-btn").click(resetFilter);
+        $(".apply-filter-button").click(applyFilter);
+        $(".reset-filter-button").click(resetFilter);
 
         const lastNameInput = $("#last-name-input").on("input", enableSubmitButton);
         const firstNameInput = $("#first-name-input").on("input", enableSubmitButton);
@@ -241,6 +318,9 @@
 
         $(".new-contact-form").on("submit", () => {
             clearValidateErrors();
+            $(".form-last-name-incorrect-input-message").removeClass("d-block").addClass("d-none");
+            $(".form-first-name-incorrect-input-message").removeClass("d-block").addClass("d-none");
+            $(".form-phone-number-incorrect-input-message").removeClass("d-block").addClass("d-none");
 
             if (validateInputsValues(lastNameInput, firstNameInput, phoneNumberInput, true)) {
                 saveNewContact(
@@ -252,11 +332,15 @@
                 lastNameInput.val("");
                 firstNameInput.val("");
                 phoneNumberInput.val("");
-                $(".submit-btn").attr("disabled", true);
+                $(".submit-button").prop("disabled", true);
                 clearValidateErrors();
             }
 
             return false;
         })
+
+        if (contacts.length > 0) {
+            renderPhoneBookTable();
+        }
     });
 })();
