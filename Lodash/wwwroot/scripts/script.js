@@ -28,7 +28,6 @@
     );
 
     const uniqueNamesAgedFrom20To30 = _.chain(peopleAgedFrom20To30)
-        .filter(p => p.age >= 20 && p.age <= 30)
         .map(p => p.name)
         .uniq()
         .sort()
@@ -40,6 +39,6 @@
         uniqueNamesAgedFrom20To30
     );
 
-    const nameCounts = _.countBy(people, "name");
-    console.log("Количество каждого имени в списке:", nameCounts);
+    const namesCounts = _.countBy(people, "name");
+    console.log("Количество каждого имени в списке:", namesCounts);
 })();
