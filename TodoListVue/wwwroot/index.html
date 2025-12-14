@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Todo List</title>
+
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+
+    <script defer src="node_modules/jquery/dist/jquery.js"></script>
+    <script defer src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script defer src="node_modules/vue/dist/vue.global.prod.js"></script>
+    <script defer src="scripts/app.js" type="module"></script>
+</head>
+<body>
+    <div id="app">
+        <div class="row d-flex justify-content-center vh-100 g-0">
+            <div class="col-lg-6 col-md-12 border-start border-end border-2 border-secondary">
+                <h1 class="text-center">TODO List</h1>
+
+                <form class="px-3" @submit.prevent="saveTodo">
+                    <div class="row">
+                        <todo-input
+                            wrapper-class="col-12 mb-2" 
+                            placeholder-text="Введите задачу"
+                            v-model="newTodo">
+                        </todo-input>
+
+                        <error-message v-if="showErrorMessage">Невозможно сохранить пустую заметку</error-message>
+                    </div>
+
+                    <div class="row">
+                        <div class="col text-end">
+                            <button class="btn btn-primary" type="submit">Сохранить</button>
+                        </div>
+                    </div>
+                </form>
+
+                <hr class="mx-1">
+                <todo-list-element :todo-list="todoList" @remove-todo="removeTodo" @save-todo="saveTodo"></todo-list-element>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

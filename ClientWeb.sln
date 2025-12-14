@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneBook", "PhoneBook\Phon
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoListJQuery", "TodoListJQuery\TodoListJQuery.csproj", "{2B00EEC9-26D9-462F-B275-4B092817F315}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoListVue", "TodoListVue\TodoListVue.csproj", "{E28F81CF-5A1C-4C72-96A9-7A0D90CAF3B6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,10 @@ Global
 		{2B00EEC9-26D9-462F-B275-4B092817F315}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B00EEC9-26D9-462F-B275-4B092817F315}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B00EEC9-26D9-462F-B275-4B092817F315}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E28F81CF-5A1C-4C72-96A9-7A0D90CAF3B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E28F81CF-5A1C-4C72-96A9-7A0D90CAF3B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E28F81CF-5A1C-4C72-96A9-7A0D90CAF3B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E28F81CF-5A1C-4C72-96A9-7A0D90CAF3B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
